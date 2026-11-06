@@ -1,0 +1,176 @@
+﻿@model IEnumerable<VideoGamePriceAggregator.Models.Store>
+
+@{
+    ViewData["Title"] = "Магазины";
+}
+
+<div class="admin-header">
+
+    <div>
+        <h1>Магазины</h1>
+
+        <p>
+            Управление магазинами, в которых продаются игры.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Stores"
+       asp-action="Create"
+       class="btn-game">
+        + Добавить магазин
+    </a>
+
+</div>
+
+
+<!-- Поиск -->
+
+<form asp-area="Admin"
+      asp-controller="Stores"
+      asp-action="Index"
+      method="get"
+      class="admin-search-form">
+
+    <input type="text"
+           name="search"
+           value="@ViewBag.Search"
+           class="game-input"
+           placeholder="Название, сайт или страна..." />
+
+    <button type="submit"
+            class="btn-game">
+        Найти
+    </button>
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Search))
+    {
+        <a asp-area="Admin"
+           asp-controller="Stores"
+           asp-action="Index"
+           class="admin-cancel">
+            Сбросить
+        </a>
+    }
+
+</form>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="admin-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="admin-error">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+@if (Model.Any())
+{
+    <div class="admin-table-container">
+
+        <table class="admin-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Сайт</th>
+                    <th>Страна</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var store in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @store.StoreId
+                        </td>
+
+                        <td>
+                            <strong>
+                                @store.Name
+                            </strong>
+                        </td>
+
+                        <td>
+
+                            <a href="@store.Website"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="admin-link">
+                                Открыть сайт
+                            </a>
+
+                        </td>
+
+                        <td>
+                            @(store.Country ?? "—")
+                        </td>
+
+                        <td>
+
+                            <div class="admin-actions">
+
+                                <a asp-area="Admin"
+                                   asp-controller="Stores"
+                                   asp-action="Edit"
+                                   asp-route-id="@store.StoreId"
+                                   class="admin-edit">
+                                    Изменить
+                                </a>
+
+                                <a asp-area="Admin"
+                                   asp-controller="Stores"
+                                   asp-action="Delete"
+                                   asp-route-id="@store.StoreId"
+                                   class="admin-delete">
+                                    Удалить
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+}
+else
+{
+    <div class="no-results">
+
+        <h2>Магазины не найдены</h2>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Search))
+        {
+            <p>
+                По запросу
+                <strong>«@ViewBag.Search»</strong>
+                ничего не найдено.
+            </p>
+        }
+        else
+        {
+            <p>
+                Список магазинов пуст.
+            </p>
+        }
+
+    </div>
+}

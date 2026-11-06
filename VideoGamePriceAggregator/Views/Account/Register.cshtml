@@ -1,0 +1,102 @@
+﻿@model VideoGamePriceAggregator.ViewModels.RegisterViewModel
+
+@{
+    ViewData["Title"] = "Регистрация";
+}
+
+<div class="account-page">
+
+    <div class="account-card">
+
+        <div class="account-header">
+            <div class="account-logo">
+                GAMEPRICE
+            </div>
+
+            <h1>Создание аккаунта</h1>
+
+            <p>
+                Зарегистрируйтесь, чтобы сохранять игры
+                в список желаемого.
+            </p>
+        </div>
+
+        <form asp-action="Register"
+              asp-controller="Account"
+              method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Login"></label>
+
+                <input asp-for="Login"
+                       class="game-input"
+                       placeholder="Введите логин" />
+
+                <span asp-validation-for="Login"
+                      class="field-validation">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+
+                <input asp-for="Email"
+                       class="game-input"
+                       placeholder="example@mail.ru" />
+
+                <span asp-validation-for="Email"
+                      class="field-validation">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password"></label>
+
+                <input asp-for="Password"
+                       class="game-input"
+                       placeholder="Минимум 6 символов" />
+
+                <span asp-validation-for="Password"
+                      class="field-validation">
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword"></label>
+
+                <input asp-for="ConfirmPassword"
+                       class="game-input"
+                       placeholder="Повторите пароль" />
+
+                <span asp-validation-for="ConfirmPassword"
+                      class="field-validation">
+                </span>
+            </div>
+
+            <button type="submit"
+                    class="btn-game account-button">
+                Зарегистрироваться
+            </button>
+
+        </form>
+
+        <div class="account-footer">
+            Уже есть аккаунт?
+
+            <a asp-controller="Account"
+               asp-action="Login">
+                Войти
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

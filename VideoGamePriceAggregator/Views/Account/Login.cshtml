@@ -1,0 +1,107 @@
+﻿@model VideoGamePriceAggregator.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Вход";
+}
+
+<div class="account-page">
+
+    <div class="account-card">
+
+        <div class="account-header">
+
+            <div class="account-logo">
+                GAMEPRICE
+            </div>
+
+            <h1>С возвращением</h1>
+
+            <p>
+                Войдите в аккаунт, чтобы продолжить.
+            </p>
+
+        </div>
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+                @TempData["SuccessMessage"]
+            </div>
+        }
+
+        <form asp-action="Login"
+              asp-controller="Account"
+              method="post">
+
+            <input type="hidden"
+                   name="returnUrl"
+                   value="@ViewBag.ReturnUrl" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Login"></label>
+
+                <input asp-for="Login"
+                       class="game-input"
+                       placeholder="Введите логин" />
+
+                <span asp-validation-for="Login"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Password"></label>
+
+                <input asp-for="Password"
+                       class="game-input"
+                       placeholder="Введите пароль" />
+
+                <span asp-validation-for="Password"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+            <div class="remember-row">
+
+                <input asp-for="RememberMe"
+                       type="checkbox" />
+
+                <label asp-for="RememberMe">
+                    Запомнить меня
+                </label>
+
+            </div>
+
+            <button type="submit"
+                    class="btn-game account-button">
+                Войти
+            </button>
+
+        </form>
+
+        <div class="account-footer">
+
+            Нет аккаунта?
+
+            <a asp-controller="Account"
+               asp-action="Register">
+                Зарегистрироваться
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

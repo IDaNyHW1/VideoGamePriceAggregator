@@ -1,0 +1,1118 @@
+/* =========================================
+   GAMEPRICE - Основной стиль проекта
+   ========================================= */
+
+:root {
+    --bg-main: #0f1117;
+    --bg-card: #181b24;
+    --bg-card-hover: #202431;
+    --border: #2a2f3d;
+    --text-main: #f1f3f5;
+    --text-secondary: #9da4b3;
+    --accent: #8b5cf6;
+    --accent-hover: #7c3aed;
+}
+
+/* Основная страница */
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Заголовки */
+
+h1, h2, h3 {
+    color: var(--text-main);
+}
+
+/* Навигация */
+
+.navbar {
+    background-color: #13161e !important;
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-brand {
+    color: var(--text-main) !important;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.nav-link {
+    color: var(--text-secondary) !important;
+    transition: color 0.2s ease;
+}
+
+    .nav-link:hover {
+        color: var(--text-main) !important;
+    }
+
+/* Карточки игр */
+
+.game-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    height: 100%;
+    padding: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .game-card:hover {
+        transform: translateY(-5px);
+        background-color: var(--bg-card-hover);
+        border-color: var(--accent);
+    }
+
+.game-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.game-description {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.game-info {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Кнопки */
+
+.btn-game {
+    display: inline-block;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 16px;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+    .btn-game:hover {
+        background-color: var(--accent-hover);
+        color: white;
+    }
+
+/* Заголовок каталога */
+
+.catalog-header {
+    margin-bottom: 32px;
+}
+
+    .catalog-header p {
+        color: var(--text-secondary);
+        margin-top: 8px;
+    }
+
+/* Контейнер сайта */
+
+main {
+    min-height: calc(100vh - 140px);
+}
+
+/* Footer */
+
+footer {
+    border-top: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   Страница игры
+   ========================================= */
+
+.game-details {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-bottom: 25px;
+}
+
+    .back-link:hover {
+        color: var(--text-main);
+    }
+
+.game-details-header {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 30px;
+}
+
+    .game-details-header h1 {
+        font-size: 2.2rem;
+        margin-bottom: 18px;
+    }
+
+.game-details-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.game-details-info {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    color: var(--text-secondary);
+}
+
+.offers-section h2 {
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.offer-placeholder {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   GAMEPRICE - Страница игры
+   ========================================= */
+
+.game-details {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 25px;
+    color: var(--text-secondary);
+    text-decoration: none;
+}
+
+    .back-link:hover {
+        color: var(--text-main);
+    }
+
+.game-details-top {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.game-details-cover {
+    width: 280px;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background-color: var(--bg-card);
+}
+
+    .game-details-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+.no-cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+}
+
+.game-details-header {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+}
+
+    .game-details-header h1 {
+        font-size: 2.3rem;
+        margin-bottom: 20px;
+    }
+
+.game-details-description {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.game-details-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    color: var(--text-secondary);
+}
+
+/* Магазины */
+
+.offers-section h2 {
+    margin-bottom: 8px;
+}
+
+.section-description {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.offers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.offer-card {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 25px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+    .offer-card:hover {
+        background-color: var(--bg-card-hover);
+        border-color: var(--accent);
+    }
+
+.offer-main h3 {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+}
+
+.offer-platform {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.offer-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.price {
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.discount {
+    background-color: var(--accent);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.offer-action {
+    min-width: 170px;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+
+    .game-details-top {
+        grid-template-columns: 1fr;
+    }
+
+    .game-details-cover {
+        margin: 0 auto;
+    }
+
+    .offer-card {
+        grid-template-columns: 1fr;
+    }
+
+    .offer-action {
+        text-align: left;
+    }
+}
+
+/* =========================================
+   Предложения магазинов
+   ========================================= */
+
+.offers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.offer-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .offer-card:hover {
+        background-color: var(--bg-card-hover);
+        border-color: var(--accent);
+    }
+
+.offer-main {
+    min-width: 180px;
+}
+
+    .offer-main h3 {
+        margin: 0 0 6px 0;
+        font-size: 1.1rem;
+    }
+
+.offer-platform {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.offer-price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.discount {
+    background-color: var(--accent);
+    color: white;
+    border-radius: 6px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.offer-action {
+    min-width: 170px;
+    text-align: right;
+}
+
+/* =========================================
+   Поиск игр
+   ========================================= */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 35px;
+    max-width: 700px;
+}
+
+    .search-form input {
+        flex: 1;
+        background-color: var(--bg-card);
+        color: var(--text-main);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 11px 15px;
+        font-size: 1rem;
+        outline: none;
+    }
+
+        .search-form input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-form input:focus {
+            border-color: var(--accent);
+        }
+
+    .search-form button {
+        cursor: pointer;
+    }
+
+.no-results {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+}
+
+    .no-results h2 {
+        margin-bottom: 10px;
+    }
+
+    .no-results p {
+        color: var(--text-secondary);
+    }
+
+/* =========================================
+   GAMEPRICE - Навигация
+   ========================================= */
+
+.game-navbar {
+    background-color: #13161e !important;
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+}
+
+    .game-navbar .navbar-brand {
+        color: var(--text-main) !important;
+        font-size: 1.25rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+
+    .game-navbar .nav-link {
+        color: var(--text-secondary) !important;
+        margin-left: 8px;
+        margin-right: 8px;
+        transition: color 0.2s ease;
+    }
+
+        .game-navbar .nav-link:hover {
+            color: var(--text-main) !important;
+        }
+
+/* =========================================
+   GAMEPRICE - Подвал
+   ========================================= */
+
+.game-footer {
+    background-color: #13161e;
+    border-top: 1px solid var(--border);
+    margin-top: 50px;
+    padding: 25px 0;
+    color: var(--text-secondary);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+    .footer-content strong {
+        color: var(--text-main);
+    }
+
+    .footer-content p {
+        margin: 5px 0 0;
+        font-size: 0.9rem;
+    }
+
+.footer-copyright {
+    font-size: 0.9rem;
+}
+
+@media (max-width: 576px) {
+
+    .footer-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* =========================================
+   GAMEPRICE - Обложки игр
+   ========================================= */
+
+.game-cover-container {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    background-color: #101218;
+}
+
+.game-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.game-card:hover .game-cover {
+    transform: scale(1.04);
+}
+
+.game-card-content {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+}
+
+.game-details-button {
+    margin-top: auto;
+}
+
+.game-card {
+    overflow: hidden;
+}
+
+/* =========================================
+   GAMEPRICE - Авторизация
+   ========================================= */
+
+.account-page {
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 15px;
+}
+
+.account-card {
+    width: 100%;
+    max-width: 460px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 38px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+.account-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.account-logo {
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.account-header h1 {
+    margin-bottom: 10px;
+    font-size: 1.9rem;
+}
+
+.account-header p {
+    color: var(--text-secondary);
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--text-main);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+.game-input {
+    width: 100%;
+    background-color: #101218;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 13px;
+    outline: none;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+    .game-input:focus {
+        border-color: var(--accent);
+        background-color: #141720;
+    }
+
+    .game-input::placeholder {
+        color: #666d7a;
+    }
+
+.field-validation {
+    display: block;
+    margin-top: 5px;
+    color: #ff6b7a;
+    font-size: 0.85rem;
+}
+
+.validation-summary {
+    margin-bottom: 20px;
+    color: #ff6b7a;
+    font-size: 0.9rem;
+}
+
+    .validation-summary ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+.account-button {
+    width: 100%;
+    margin-top: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.account-footer {
+    margin-top: 25px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+    .account-footer a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+        .account-footer a:hover {
+            color: var(--accent-hover);
+        }
+
+.remember-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+    .remember-row input {
+        accent-color: var(--accent);
+    }
+
+    .remember-row label {
+        cursor: pointer;
+    }
+
+.success-message {
+    background-color: rgba(139, 92, 246, 0.12);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+/* =========================================
+   GAMEPRICE - Пользовательское меню
+   ========================================= */
+
+.user-name {
+    color: var(--text-main) !important;
+    font-weight: 600;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+/* =========================================
+   GAMEPRICE - Желаемые игры
+   ========================================= */
+
+.favorite-action {
+    margin-top: 25px;
+}
+
+.favorite-button {
+    display: inline-block;
+    background-color: transparent;
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+    .favorite-button:hover {
+        border-color: var(--accent);
+        color: var(--text-main);
+        background-color: rgba(139, 92, 246, 0.1);
+    }
+
+.favorite-active {
+    border-color: var(--accent);
+    background-color: rgba(139, 92, 246, 0.12);
+}
+
+.favorite-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.remove-favorite {
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    padding: 9px 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+    .remove-favorite:hover {
+        color: #ff6b7a;
+    }
+
+/* =========================================
+   GAMEPRICE - Админ-панель
+   ========================================= */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+    .admin-header h1 {
+        margin-bottom: 8px;
+    }
+
+    .admin-header p {
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+.admin-table-container {
+    overflow-x: auto;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .admin-table th {
+        background-color: #13161e;
+        color: var(--text-secondary);
+        padding: 15px;
+        text-align: left;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+
+    .admin-table td {
+        padding: 15px;
+        border-top: 1px solid var(--border);
+        color: var(--text-main);
+    }
+
+    .admin-table tbody tr:hover {
+        background-color: var(--bg-card-hover);
+    }
+
+    .admin-table .muted {
+        color: var(--text-secondary);
+    }
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.admin-edit,
+.admin-delete {
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.admin-edit {
+    color: var(--accent);
+}
+
+.admin-delete {
+    color: #ff6b7a;
+}
+
+    .admin-edit:hover,
+    .admin-delete:hover {
+        text-decoration: underline;
+    }
+
+/* Сообщения */
+
+.admin-success,
+.admin-error,
+.admin-warning {
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+}
+
+.admin-success {
+    background-color: rgba(139, 92, 246, 0.12);
+    border: 1px solid var(--accent);
+    color: var(--text-main);
+}
+
+.admin-error {
+    background-color: rgba(255, 107, 122, 0.08);
+    border: 1px solid #ff6b7a;
+    color: var(--text-main);
+}
+
+.admin-warning {
+    background-color: rgba(255, 190, 80, 0.08);
+    border: 1px solid #d9a441;
+    color: var(--text-main);
+}
+
+/* Форма */
+
+.admin-form-page {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.admin-form-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 35px;
+}
+
+.admin-form-header {
+    margin-bottom: 30px;
+}
+
+    .admin-form-header h1 {
+        margin-bottom: 8px;
+    }
+
+    .admin-form-header p {
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+.admin-form-group {
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+    .admin-form-group label {
+        display: block;
+        margin-bottom: 7px;
+        color: var(--text-main);
+        font-size: 0.9rem;
+        font-weight: 600;
+    }
+
+.admin-form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.admin-textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+.admin-form-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.admin-cancel {
+    display: inline-block;
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 9px 16px;
+    text-decoration: none;
+}
+
+    .admin-cancel:hover {
+        color: var(--text-main);
+        border-color: var(--accent);
+    }
+
+.danger-button {
+    background-color: #8f3442;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 17px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+    .danger-button:hover {
+        background-color: #a83c4c;
+    }
+
+.delete-game-info {
+    padding: 20px;
+    background-color: #101218;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+    .delete-game-info h2 {
+        margin-bottom: 15px;
+    }
+
+    .delete-game-info p {
+        color: var(--text-secondary);
+        margin-bottom: 5px;
+    }
+
+@media (max-width: 768px) {
+
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}
+
+.form-hint {
+    margin-top: 6px;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.current-cover {
+    width: 140px;
+    aspect-ratio: 2 / 3;
+    overflow: hidden;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+}
+
+    .current-cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+/* =========================================
+   GAMEPRICE - Ссылки администратора
+   ========================================= */
+
+.admin-link {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+    .admin-link:hover {
+        text-decoration: underline;
+    }
+
+/* =========================================
+   GAMEPRICE - Статус предложения
+   ========================================= */
+
+.status-available {
+    color: #8fd694;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-unavailable {
+    color: #ff6b7a;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* =========================================
+   GAMEPRICE - Поиск в админ-панели
+   ========================================= */
+
+.admin-search-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 25px;
+    max-width: 900px;
+}
+
+    .admin-search-form .game-input {
+        flex: 1;
+    }
+
+    .admin-search-form .admin-cancel {
+        white-space: nowrap;
+    }
+
+@media (max-width: 768px) {
+
+    .admin-search-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+        .admin-search-form .btn-game,
+        .admin-search-form .admin-cancel {
+            text-align: center;
+        }
+}

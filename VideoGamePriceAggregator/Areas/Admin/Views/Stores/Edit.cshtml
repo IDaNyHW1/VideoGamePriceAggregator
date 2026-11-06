@@ -1,0 +1,98 @@
+﻿@model VideoGamePriceAggregator.Models.Store
+
+@{
+    ViewData["Title"] = "Редактирование магазина";
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Редактирование магазина</h1>
+
+            <p>
+                Изменение информации о магазине.
+            </p>
+
+        </div>
+
+        <form asp-action="Edit"
+              method="post">
+
+            <input type="hidden"
+                   asp-for="StoreId" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+            <div class="admin-form-group">
+
+                <label asp-for="Name">
+                    Название
+                </label>
+
+                <input asp-for="Name"
+                       class="game-input" />
+
+                <span asp-validation-for="Name"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+            <div class="admin-form-group">
+
+                <label asp-for="Website">
+                    Сайт
+                </label>
+
+                <input asp-for="Website"
+                       class="game-input" />
+
+                <span asp-validation-for="Website"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+            <div class="admin-form-group">
+
+                <label asp-for="Country">
+                    Страна
+                </label>
+
+                <input asp-for="Country"
+                       class="game-input" />
+
+                <span asp-validation-for="Country"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+            <div class="admin-form-buttons">
+
+                <button type="submit"
+                        class="btn-game">
+                    Сохранить изменения
+                </button>
+
+                <a asp-action="Index"
+                   class="admin-cancel">
+                    Отмена
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

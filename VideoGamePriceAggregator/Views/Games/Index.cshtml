@@ -1,0 +1,125 @@
+﻿@model IEnumerable<VideoGamePriceAggregator.Models.Game>
+
+@{
+    ViewData["Title"] = "Игры и цены";
+}
+
+<div class="catalog-header">
+
+    <h1>Игры и цены</h1>
+
+    <p>
+        Найдите игру и сравните цены в разных магазинах.
+    </p>
+
+</div>
+
+
+<form asp-controller="Games"
+      asp-action="Index"
+      method="get"
+      class="search-form">
+
+    <input type="text"
+           name="search"
+           value="@ViewBag.Search"
+           placeholder="Введите название игры..." />
+
+    <button type="submit"
+            class="btn-game">
+        Найти
+    </button>
+
+</form>
+
+
+@if (Model.Any())
+{
+    <div class="row g-4">
+
+        @foreach (var game in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+
+                <div class="game-card">
+
+                    <!-- Обложка игры -->
+                    @if (!string.IsNullOrEmpty(game.CoverUrl))
+                    {
+                        <div class="game-cover-container">
+
+                            <img src="@game.CoverUrl"
+                                 alt="Обложка @game.Title"
+                                 class="game-cover" />
+
+                        </div>
+                    }
+
+                    <!-- Информация об игре -->
+                    <div class="game-card-content">
+
+                        <h2 class="game-title">
+                            @game.Title
+                        </h2>
+
+
+                        @if (!string.IsNullOrEmpty(game.Description))
+                        {
+                            <p class="game-description">
+                                @game.Description
+                            </p>
+                        }
+
+
+                        <div class="game-info">
+
+                            @if (game.ReleaseDate != null)
+                            {
+                                <div>
+                                    <strong>Дата:</strong>
+                                    @game.ReleaseDate.Value.ToString("dd.MM.yyyy")
+                                </div>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(game.AgeRating))
+                            {
+                                <div>
+                                    <strong>Возраст:</strong>
+                                    @game.AgeRating
+                                </div>
+                            }
+
+                        </div>
+
+
+                        <a asp-controller="Games"
+                           asp-action="Details"
+                           asp-route-id="@game.GameId"
+                           class="btn-game game-details-button">
+
+                            Подробнее
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="no-results">
+
+        <h2>Игры не найдены</h2>
+
+        <p>
+            Попробуйте изменить поисковый запрос.
+        </p>
+
+    </div>
+}

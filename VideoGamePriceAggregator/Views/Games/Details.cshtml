@@ -1,0 +1,221 @@
+﻿@model VideoGamePriceAggregator.ViewModels.GameDetailsViewModel
+
+@{
+    ViewData["Title"] = Model.Game.Title;
+}
+
+<div class="game-details">
+
+    <!-- Ссылка назад -->
+    <a asp-controller="Games"
+       asp-action="Index"
+       class="back-link">
+        ← Вернуться к каталогу
+    </a>
+
+
+    <!-- Основная информация об игре -->
+    <div class="game-details-top">
+
+        <!-- Обложка -->
+        <div class="game-details-cover">
+
+            @if (!string.IsNullOrEmpty(Model.Game.CoverUrl))
+            {
+                <img src="@Model.Game.CoverUrl"
+                     alt="Обложка @Model.Game.Title" />
+            }
+            else
+            {
+                <div class="no-cover">
+                    Нет обложки
+                </div>
+            }
+
+        </div>
+
+
+        <!-- Информация -->
+        <div class="game-details-header">
+
+            <h1>
+                @Model.Game.Title
+            </h1>
+
+
+            @if (!string.IsNullOrEmpty(Model.Game.Description))
+            {
+                <p class="game-details-description">
+                    @Model.Game.Description
+                </p>
+            }
+
+
+            <div class="game-details-info">
+
+                @if (Model.Game.ReleaseDate != null)
+                {
+                    <span>
+                        <strong>Дата выхода:</strong>
+                        @Model.Game.ReleaseDate.Value.ToString("dd.MM.yyyy")
+                    </span>
+                }
+
+
+                @if (!string.IsNullOrEmpty(Model.Game.AgeRating))
+                {
+                    <span>
+                        <strong>Возраст:</strong>
+                        @Model.Game.AgeRating
+                    </span>
+                }
+
+            </div>
+
+
+            <!-- Избранное -->
+            <div class="favorite-action">
+
+                @if (User.Identity?.IsAuthenticated == true)
+                {
+                    @if (Model.IsFavorite)
+                    {
+                        <form asp-controller="Favorites"
+                              asp-action="Remove"
+                              method="post">
+
+                            <input type="hidden"
+                                   name="gameId"
+                                   value="@Model.Game.GameId" />
+
+                            <input type="hidden"
+                                   name="returnUrl"
+                                   value="@Context.Request.Path@Context.Request.QueryString" />
+
+                            <button type="submit"
+                                    class="favorite-button favorite-active">
+                                ♥ Убрать из желаемого
+                            </button>
+
+                        </form>
+                    }
+                    else
+                    {
+                        <form asp-controller="Favorites"
+                              asp-action="Add"
+                              method="post">
+
+                            <input type="hidden"
+                                   name="gameId"
+                                   value="@Model.Game.GameId" />
+
+                            <input type="hidden"
+                                   name="returnUrl"
+                                   value="@Context.Request.Path@Context.Request.QueryString" />
+
+                            <button type="submit"
+                                    class="favorite-button">
+                                ♡ В желаемое
+                            </button>
+
+                        </form>
+                    }
+                }
+                else
+                {
+                    <a asp-controller="Account"
+                       asp-action="Login"
+                       asp-route-returnUrl="@Context.Request.Path@Context.Request.QueryString"
+                       class="favorite-button">
+                        ♡ Войти, чтобы добавить
+                    </a>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Предложения магазинов -->
+    <div class="offers-section">
+
+        <h2>
+            Где купить
+        </h2>
+
+        <p class="section-description">
+            Сравните цены в доступных магазинах.
+        </p>
+
+
+        @if (Model.Offers.Any())
+        {
+            <div class="offers-list">
+
+                @foreach (var offer in Model.Offers)
+                {
+                    <div class="offer-card">
+
+                        <!-- Магазин и платформа -->
+                        <div class="offer-main">
+
+                            <h3>
+                                @offer.Store.Name
+                            </h3>
+
+                            <span class="offer-platform">
+                                @offer.Platform.Name
+                            </span>
+
+                        </div>
+
+
+                        <!-- Цена -->
+                        <div class="offer-price">
+
+                            <span class="price">
+                                @offer.Price.ToString("N0") ₽
+                            </span>
+
+                            @if (offer.DiscountPercent > 0)
+                            {
+                                <span class="discount">
+                                    -@offer.DiscountPercent.ToString("0")%
+                                </span>
+                            }
+
+                        </div>
+
+
+                        <!-- Кнопка магазина -->
+                        <div class="offer-action">
+
+                            @if (!string.IsNullOrWhiteSpace(offer.ProductUrl))
+                            {
+                                <a href="@offer.ProductUrl"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="btn-game">
+                                    Перейти к игре
+                                </a>
+                            }
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="offer-placeholder">
+                Сейчас нет доступных предложений для этой игры.
+            </div>
+        }
+
+    </div>
+
+</div>

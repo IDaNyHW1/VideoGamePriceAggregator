@@ -1,0 +1,219 @@
+﻿@model IEnumerable<VideoGamePriceAggregator.Models.Offer>
+
+@{
+    ViewData["Title"] = "Предложения";
+}
+
+<div class="admin-header">
+
+    <div>
+        <h1>Предложения магазинов</h1>
+
+        <p>
+            Управление ценами, скидками и ссылками на игры.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Offers"
+       asp-action="Create"
+       class="btn-game">
+        + Добавить предложение
+    </a>
+
+</div>
+
+
+<!-- Поиск -->
+
+<form asp-area="Admin"
+      asp-controller="Offers"
+      asp-action="Index"
+      method="get"
+      class="admin-search-form">
+
+    <input type="text"
+           name="search"
+           value="@ViewBag.Search"
+           class="game-input"
+           placeholder="Игра, магазин или платформа..." />
+
+    <button type="submit"
+            class="btn-game">
+        Найти
+    </button>
+
+    @if (!string.IsNullOrWhiteSpace(ViewBag.Search))
+    {
+        <a asp-area="Admin"
+           asp-controller="Offers"
+           asp-action="Index"
+           class="admin-cancel">
+            Сбросить
+        </a>
+    }
+
+</form>
+
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="admin-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="admin-error">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+@if (Model.Any())
+{
+    <div class="admin-table-container">
+
+        <table class="admin-table">
+
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Игра</th>
+                    <th>Магазин</th>
+                    <th>Платформа</th>
+                    <th>Цена</th>
+                    <th>Скидка</th>
+                    <th>Доступно</th>
+                    <th>Обновлено</th>
+                    <th>Действия</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var offer in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @offer.OfferId
+                        </td>
+
+                        <td>
+                            <strong>
+                                @offer.Game.Title
+                            </strong>
+                        </td>
+
+                        <td>
+                            @offer.Store.Name
+                        </td>
+
+                        <td>
+                            @offer.Platform.Name
+                        </td>
+
+                        <td>
+                            <strong>
+                                @offer.Price.ToString("N0") ₽
+                            </strong>
+                        </td>
+
+                        <td>
+
+                            @if (offer.DiscountPercent > 0)
+                            {
+                                <span class="discount">
+                                    -@offer.DiscountPercent.ToString("0")%
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="muted">
+                                    —
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+
+                            @if (offer.IsAvailable)
+                            {
+                                <span class="status-available">
+                                    Доступно
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="status-unavailable">
+                                    Недоступно
+                                </span>
+                            }
+
+                        </td>
+
+                        <td>
+                            @offer.LastUpdated.ToString(
+                                "dd.MM.yyyy HH:mm")
+                        </td>
+
+                        <td>
+
+                            <div class="admin-actions">
+
+                                <a asp-area="Admin"
+                                   asp-controller="Offers"
+                                   asp-action="Edit"
+                                   asp-route-id="@offer.OfferId"
+                                   class="admin-edit">
+                                    Изменить
+                                </a>
+
+                                <a asp-area="Admin"
+                                   asp-controller="Offers"
+                                   asp-action="Delete"
+                                   asp-route-id="@offer.OfferId"
+                                   class="admin-delete">
+                                    Удалить
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+}
+else
+{
+    <div class="no-results">
+
+        <h2>Предложения не найдены</h2>
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.Search))
+        {
+            <p>
+                По запросу
+                <strong>«@ViewBag.Search»</strong>
+                ничего не найдено.
+            </p>
+        }
+        else
+        {
+            <p>
+                Список предложений пуст.
+            </p>
+        }
+
+    </div>
+}

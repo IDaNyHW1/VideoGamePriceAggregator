@@ -1,0 +1,95 @@
+﻿@model VideoGamePriceAggregator.Models.Offer
+
+@{
+    ViewData["Title"] = "Удаление предложения";
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Удаление предложения</h1>
+
+            <p>
+                Вы собираетесь удалить ценовое предложение.
+            </p>
+
+        </div>
+
+
+        <div class="delete-game-info">
+
+            <h2>
+                @Model.Game.Title
+            </h2>
+
+            <p>
+                Магазин:
+                <strong>@Model.Store.Name</strong>
+            </p>
+
+            <p>
+                Платформа:
+                <strong>@Model.Platform.Name</strong>
+            </p>
+
+            <p>
+                Цена:
+                <strong>
+                    @Model.Price.ToString("N0") ₽
+                </strong>
+            </p>
+
+            @if (Model.DiscountPercent > 0)
+            {
+                <p>
+                    Скидка:
+                    <strong>
+                        -@Model.DiscountPercent.ToString("0")%
+                    </strong>
+                </p>
+            }
+
+        </div>
+
+
+        <div class="admin-warning">
+
+            <strong>Внимание!</strong>
+
+            <p>
+                После удаления это предложение исчезнет
+                со страницы игры.
+            </p>
+
+        </div>
+
+
+        <form asp-action="DeleteConfirmed"
+              method="post">
+
+            <input type="hidden"
+                   name="id"
+                   value="@Model.OfferId" />
+
+            <div class="admin-form-buttons">
+
+                <button type="submit"
+                        class="danger-button">
+                    Да, удалить
+                </button>
+
+                <a asp-action="Index"
+                   class="admin-cancel">
+                    Отмена
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

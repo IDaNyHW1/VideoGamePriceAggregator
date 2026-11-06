@@ -1,0 +1,210 @@
+﻿@model VideoGamePriceAggregator.Models.Game
+
+@{
+    ViewData["Title"] = "Добавление игры";
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Добавление игры</h1>
+
+            <p>
+                Заполните информацию о новой игре.
+            </p>
+
+        </div>
+
+
+        <form asp-action="Create"
+              method="post"
+              enctype="multipart/form-data">
+
+            <!-- Ошибки -->
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+
+            <!-- Название -->
+            <div class="admin-form-group">
+
+                <label asp-for="Title">
+                    Название игры
+                </label>
+
+                <input asp-for="Title"
+                       class="game-input"
+                       placeholder="Например, Elden Ring" />
+
+                <span asp-validation-for="Title"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+
+            <!-- Описание -->
+            <div class="admin-form-group">
+
+                <label asp-for="Description">
+                    Описание
+                </label>
+
+                <textarea asp-for="Description"
+                          class="game-input admin-textarea"
+                          placeholder="Описание игры"></textarea>
+
+                <span asp-validation-for="Description"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+
+            <!-- Дата и возраст -->
+            <div class="admin-form-row">
+
+                <div class="admin-form-group">
+
+                    <label asp-for="ReleaseDate">
+                        Дата выхода
+                    </label>
+
+                    <input asp-for="ReleaseDate"
+                           type="date"
+                           class="game-input" />
+
+                    <span asp-validation-for="ReleaseDate"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+
+                <div class="admin-form-group">
+
+                    <label asp-for="AgeRating">
+                        Возрастной рейтинг
+                    </label>
+
+                    <input asp-for="AgeRating"
+                           class="game-input"
+                           placeholder="18+" />
+
+                    <span asp-validation-for="AgeRating"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Разработчик и издатель -->
+            <div class="admin-form-row">
+
+                <div class="admin-form-group">
+
+                    <label asp-for="DeveloperId">
+                        Разработчик
+                    </label>
+
+                    <select asp-for="DeveloperId"
+                            asp-items="ViewBag.DeveloperId"
+                            class="game-input">
+
+                        <option value="">
+                            Не указан
+                        </option>
+
+                    </select>
+
+                    <span asp-validation-for="DeveloperId"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+
+                <div class="admin-form-group">
+
+                    <label asp-for="PublisherId">
+                        Издатель
+                    </label>
+
+                    <select asp-for="PublisherId"
+                            asp-items="ViewBag.PublisherId"
+                            class="game-input">
+
+                        <option value="">
+                            Не указан
+                        </option>
+
+                    </select>
+
+                    <span asp-validation-for="PublisherId"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Обложка -->
+            <div class="admin-form-group">
+
+                <label for="coverFile">
+                    Обложка игры
+                </label>
+
+                <input type="file"
+                       id="coverFile"
+                       name="coverFile"
+                       class="game-input"
+                       accept=".jpg,.jpeg,.png,.webp" />
+
+                <div class="form-hint">
+                    Выберите изображение для обложки игры.
+                    Поддерживаются JPG, JPEG, PNG и WEBP.
+                    Максимальный размер — 5 МБ.
+                </div>
+
+                <span class="field-validation">
+                    @Html.ValidationMessage("coverFile")
+                </span>
+
+            </div>
+
+
+            <!-- Кнопки -->
+            <div class="admin-form-buttons">
+
+                <button type="submit"
+                        class="btn-game">
+                    Сохранить
+                </button>
+
+                <a asp-action="Index"
+                   class="admin-cancel">
+                    Отмена
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}

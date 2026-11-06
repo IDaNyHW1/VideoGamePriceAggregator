@@ -1,0 +1,94 @@
+﻿@model VideoGamePriceAggregator.Models.Store
+
+@{
+    ViewData["Title"] = "Удаление магазина";
+
+    bool hasOffers = ViewBag.HasOffers ?? false;
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Удаление магазина</h1>
+
+            <p>
+                Вы собираетесь удалить магазин.
+            </p>
+
+        </div>
+
+        <div class="delete-game-info">
+
+            <h2>
+                @Model.Name
+            </h2>
+
+            <p>
+                Сайт:
+                @Model.Website
+            </p>
+
+            <p>
+                Страна:
+                @(Model.Country ?? "Не указана")
+            </p>
+
+        </div>
+
+        @if (hasOffers)
+        {
+            <div class="admin-error">
+
+                <strong>Удаление невозможно.</strong>
+
+                <p>
+                    У этого магазина есть предложения игр.
+                    Сначала удалите или измените связанные
+                    предложения.
+                </p>
+
+            </div>
+
+            <a asp-action="Index"
+               class="btn-game">
+                Вернуться к списку
+            </a>
+        }
+        else
+        {
+            <div class="admin-warning">
+
+                После удаления магазин будет удалён из каталога.
+
+            </div>
+
+            <form asp-action="DeleteConfirmed"
+                  method="post">
+
+                <input type="hidden"
+                       name="id"
+                       value="@Model.StoreId" />
+
+                <div class="admin-form-buttons">
+
+                    <button type="submit"
+                            class="danger-button">
+                        Да, удалить
+                    </button>
+
+                    <a asp-action="Index"
+                       class="admin-cancel">
+                        Отмена
+                    </a>
+
+                </div>
+
+            </form>
+        }
+
+    </div>
+
+</div>

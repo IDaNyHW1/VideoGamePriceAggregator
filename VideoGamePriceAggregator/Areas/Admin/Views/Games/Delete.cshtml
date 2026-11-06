@@ -1,0 +1,82 @@
+﻿@model VideoGamePriceAggregator.Models.Game
+
+@{
+    ViewData["Title"] = "Удаление игры";
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Удаление игры</h1>
+
+            <p>
+                Вы собираетесь удалить игру из каталога.
+            </p>
+
+        </div>
+
+        <div class="delete-game-info">
+
+            <h2>
+                @Model.Title
+            </h2>
+
+            @if (Model.Developer != null)
+            {
+                <p>
+                    Разработчик:
+                    @Model.Developer.Name
+                </p>
+            }
+
+            @if (Model.Publisher != null)
+            {
+                <p>
+                    Издатель:
+                    @Model.Publisher.Name
+                </p>
+            }
+
+        </div>
+
+        <div class="admin-warning">
+
+            <strong>Внимание!</strong>
+
+            <p>
+                При удалении игры также будут автоматически
+                удалены связанные предложения магазинов,
+                избранное, отзывы и другие связанные записи.
+            </p>
+
+        </div>
+
+        <form asp-action="DeleteConfirmed"
+              method="post">
+
+            <input type="hidden"
+                   name="id"
+                   value="@Model.GameId" />
+
+            <div class="admin-form-buttons">
+
+                <button type="submit"
+                        class="danger-button">
+                    Да, удалить игру
+                </button>
+
+                <a asp-action="Index"
+                   class="admin-cancel">
+                    Отмена
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

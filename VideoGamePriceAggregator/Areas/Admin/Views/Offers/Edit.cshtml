@@ -1,0 +1,199 @@
+﻿@model VideoGamePriceAggregator.Models.Offer
+
+@{
+    ViewData["Title"] = "Редактирование предложения";
+}
+
+<div class="admin-form-page">
+
+    <div class="admin-form-card">
+
+        <div class="admin-form-header">
+
+            <h1>Редактирование предложения</h1>
+
+            <p>
+                Изменение цены, скидки или ссылки на игру.
+            </p>
+
+        </div>
+
+        <form asp-action="Edit"
+              method="post">
+
+            <input type="hidden"
+                   asp-for="OfferId" />
+
+            <div asp-validation-summary="ModelOnly"
+                 class="validation-summary">
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label asp-for="GameId">
+                    Игра
+                </label>
+
+                <select asp-for="GameId"
+                        asp-items="ViewBag.GameId"
+                        class="game-input">
+
+                    <option value="">
+                        Выберите игру
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="GameId"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label asp-for="StoreId">
+                    Магазин
+                </label>
+
+                <select asp-for="StoreId"
+                        asp-items="ViewBag.StoreId"
+                        class="game-input">
+
+                    <option value="">
+                        Выберите магазин
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="StoreId"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label asp-for="PlatformId">
+                    Платформа
+                </label>
+
+                <select asp-for="PlatformId"
+                        asp-items="ViewBag.PlatformId"
+                        class="game-input">
+
+                    <option value="">
+                        Выберите платформу
+                    </option>
+
+                </select>
+
+                <span asp-validation-for="PlatformId"
+                      class="field-validation">
+                </span>
+
+            </div>
+
+
+            <div class="admin-form-row">
+
+                <div class="admin-form-group">
+
+                    <label asp-for="Price">
+                        Цена, ₽
+                    </label>
+
+                    <input asp-for="Price"
+                           type="number"
+                           step="1"
+                           min="0"
+                           class="game-input" />
+
+                    <span asp-validation-for="Price"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+
+                <div class="admin-form-group">
+
+                    <label asp-for="DiscountPercent">
+                        Скидка, %
+                    </label>
+
+                    <input asp-for="DiscountPercent"
+                           type="number"
+                           step="1"
+                           min="0"
+                           max="100"
+                           class="game-input" />
+
+                    <span asp-validation-for="DiscountPercent"
+                          class="field-validation">
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="admin-form-group">
+
+                <label asp-for="ProductUrl">
+                    Ссылка на страницу игры
+                </label>
+
+                <input asp-for="ProductUrl"
+                       type="url"
+                       class="game-input" />
+
+                <span asp-validation-for="ProductUrl"
+                      class="field-validation">
+                </span>
+
+                <div class="form-hint">
+                    Ссылка должна вести непосредственно на страницу игры.
+                </div>
+
+            </div>
+
+
+            <div class="remember-row">
+
+                <input asp-for="IsAvailable"
+                       type="checkbox" />
+
+                <label asp-for="IsAvailable">
+                    Предложение доступно
+                </label>
+
+            </div>
+
+
+            <div class="admin-form-buttons">
+
+                <button type="submit"
+                        class="btn-game">
+                    Сохранить изменения
+                </button>
+
+                <a asp-action="Index"
+                   class="admin-cancel">
+                    Отмена
+                </a>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

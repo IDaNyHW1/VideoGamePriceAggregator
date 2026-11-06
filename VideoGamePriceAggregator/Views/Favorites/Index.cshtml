@@ -1,0 +1,121 @@
+﻿@model IEnumerable<VideoGamePriceAggregator.Models.Favorite>
+
+@{
+    ViewData["Title"] = "Желаемые игры";
+}
+
+<div class="catalog-header">
+
+    <h1>Желаемые игры</h1>
+
+    <p>
+        Игры, которые вы хотите приобрести.
+    </p>
+
+</div>
+
+
+@if (Model.Any())
+{
+    <div class="row g-4">
+
+        @foreach (var favorite in Model)
+        {
+            <div class="col-md-6 col-lg-4 col-xl-3">
+
+                <div class="game-card">
+
+                    <!-- Обложка игры -->
+                    @if (!string.IsNullOrEmpty(favorite.Game.CoverUrl))
+                    {
+                        <div class="game-cover-container">
+
+                            <img src="@favorite.Game.CoverUrl"
+                                 alt="Обложка @favorite.Game.Title"
+                                 class="game-cover" />
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="game-cover-container no-cover-container">
+
+                            <div class="no-cover">
+                                Нет обложки
+                            </div>
+
+                        </div>
+                    }
+
+                    <!-- Информация об игре -->
+                    <div class="game-card-content">
+
+                        <h2 class="game-title">
+                            @favorite.Game.Title
+                        </h2>
+
+
+                        @if (!string.IsNullOrEmpty(
+                            favorite.Game.Description))
+                        {
+                            <p class="game-description">
+                                @favorite.Game.Description
+                            </p>
+                        }
+
+
+                        <div class="favorite-card-actions">
+
+                            <a asp-controller="Games"
+                               asp-action="Details"
+                               asp-route-id="@favorite.Game.GameId"
+                               class="btn-game">
+                                Подробнее
+                            </a>
+
+
+                            <form asp-controller="Favorites"
+                                  asp-action="Remove"
+                                  method="post">
+
+                                <input type="hidden"
+                                       name="gameId"
+                                       value="@favorite.Game.GameId" />
+
+                                <button type="submit"
+                                        class="remove-favorite">
+                                    Удалить
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}
+else
+{
+    <div class="no-results">
+
+        <h2>Список пока пуст</h2>
+
+        <p>
+            Откройте игру в каталоге и добавьте её
+            в список желаемых.
+        </p>
+
+        <a asp-controller="Games"
+           asp-action="Index"
+           class="btn-game">
+            Перейти в каталог
+        </a>
+
+    </div>
+}

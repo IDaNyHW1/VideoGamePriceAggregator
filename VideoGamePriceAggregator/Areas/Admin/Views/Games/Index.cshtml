@@ -1,0 +1,225 @@
+﻿@model IEnumerable<VideoGamePriceAggregator.Models.Game>
+
+@{
+    ViewData["Title"] = "Управление играми";
+
+    string? search = ViewBag.Search as string;
+}
+
+<div class="admin-header">
+
+    <div>
+        <h1>Управление играми</h1>
+
+        <p>
+            Добавление, редактирование и удаление игр каталога.
+        </p>
+    </div>
+
+    <a asp-area="Admin"
+       asp-controller="Games"
+       asp-action="Create"
+       class="btn-game">
+        + Добавить игру
+    </a>
+
+</div>
+
+
+<!-- Поиск -->
+
+<form asp-area="Admin"
+      asp-controller="Games"
+      asp-action="Index"
+      method="get"
+      class="admin-search-form">
+
+    <input type="text"
+           name="search"
+           value="@search"
+           class="game-input"
+           placeholder="Поиск по названию игры..." />
+
+    <button type="submit"
+            class="btn-game">
+        Найти
+    </button>
+
+    @if (!string.IsNullOrWhiteSpace(search))
+    {
+        <a asp-area="Admin"
+           asp-controller="Games"
+           asp-action="Index"
+           class="admin-cancel">
+            Сбросить
+        </a>
+    }
+
+</form>
+
+
+<!-- Сообщение об успешном действии -->
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="admin-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+<!-- Сообщение об ошибке -->
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="admin-error">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
+<!-- Список игр -->
+@if (Model.Any())
+{
+    <div class="admin-table-container">
+
+        <table class="admin-table">
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Название</th>
+                    <th>Дата выхода</th>
+                    <th>Разработчик</th>
+                    <th>Издатель</th>
+                    <th>Возраст</th>
+                    <th>Действия</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                @foreach (var game in Model)
+                {
+                    <tr>
+
+                        <!-- ID -->
+
+                        <td>
+                            @game.GameId
+                        </td>
+
+
+                        <!-- Название -->
+
+                        <td>
+                            <strong>
+                                @game.Title
+                            </strong>
+                        </td>
+
+
+                        <!-- Дата выхода -->
+
+                        <td>
+
+                            @if (game.ReleaseDate.HasValue)
+                            {
+                                <span>
+                                    @game.ReleaseDate.Value.Day.ToString("00").
+                                    @game.ReleaseDate.Value.Month.ToString("00").
+                                    @game.ReleaseDate.Value.Year
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="muted">
+                                    Не указана
+                                </span>
+                            }
+
+                        </td>
+
+
+                        <!-- Разработчик -->
+
+                        <td>
+                            @(game.Developer?.Name ?? "Не указан")
+                        </td>
+
+
+                        <!-- Издатель -->
+
+                        <td>
+                            @(game.Publisher?.Name ?? "Не указан")
+                        </td>
+
+
+                        <!-- Возрастной рейтинг -->
+
+                        <td>
+                            @(game.AgeRating ?? "—")
+                        </td>
+
+
+                        <!-- Действия -->
+
+                        <td>
+
+                            <div class="admin-actions">
+
+                                <a asp-area="Admin"
+                                   asp-controller="Games"
+                                   asp-action="Edit"
+                                   asp-route-id="@game.GameId"
+                                   class="admin-edit">
+                                    Изменить
+                                </a>
+
+                                <a asp-area="Admin"
+                                   asp-controller="Games"
+                                   asp-action="Delete"
+                                   asp-route-id="@game.GameId"
+                                   class="admin-delete">
+                                    Удалить
+                                </a>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+}
+else
+{
+    <!-- Игры не найдены -->
+
+    <div class="no-results">
+
+        <h2>Игры не найдены</h2>
+
+        @if (!string.IsNullOrWhiteSpace(search))
+        {
+            <p>
+                По запросу
+                <strong>«@search»</strong>
+                ничего не найдено.
+            </p>
+        }
+        else
+        {
+            <p>
+                В каталоге пока нет игр.
+            </p>
+        }
+
+    </div>
+}
